@@ -1,0 +1,543 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<title>Pulse rankings: committer data</title>
+<style>
+  body { font-family: sans-serif; }
+  body > section { margin-right: 64px; justify-content: center; }
+  body > section { display: flex; flex-flow: row wrap; padding-top: 20px }
+  section img { padding-top: 24px; padding-right: 12px; }
+  body > div { display: flex; flex-flow: row wrap; padding-top: 20px }
+  body > div { margin-bottom: 48px; }
+  h1 { font-size: 28px; color: forestgreen; text-align: center; }
+  h1 ~ p { text-align: center; }
+  table { counter-reset: rowNumber; }
+  table tr::before { display: table-cell; }
+  table tr::before { padding-right: 0.3em; padding-bottom: 3px; }
+  table tr::before { text-align: right; vertical-align: bottom; }
+  table tr::before { counter-increment: rowNumber; }
+  table tr::before { content: counter(rowNumber); }
+  table { text-align: right; min-width: 330px; }
+  table { margin: 2px 5px 56px 20px; border: 1px solid #ccc; }
+  thead { text-align: center; vertical-align: bottom }
+  th, td { padding: 8px; }
+  th { background: #eee; font-size: .95em; color: forestgreen; }
+  tbody tr { font-size: 13px }
+  td { padding: 4px 8px; vertical-align: bottom; }
+  table caption { height: 36px; }
+  table caption { padding-bottom: 6px; margin-top: 8px }
+  table caption { font-weight: bold; color: forestgreen; }
+  caption::first-letter { text-transform:capitalize; }
+  td a { font-weight: normal; vertical-align: bottom; }
+  tbody tr.highlight { background: #00ff28 !important; color: white; }
+  tbody tr.highlight { color: #111 !important; }
+  tbody tr.highlight a { color: #111 !important; }
+  tbody tr.highlight:nth-child(even) { background: #00ff28 !important; }
+  tbody tr:nth-child(even) { background: #eee; }
+  tbody tr:nth-child(even) { font-weight: bold; color: forestgreen; }
+  tfoot tr td { border-top: 1px solid #ccc; padding-top: 8px }
+  tfoot tr td { text-align: center; font-size: 13px;}
+  div ~ p { margin-top: -72px; margin-left: 20px; }
+</style>
+<section>
+  <div>
+    <a href="https://github.com/git-pulse/tools">
+      <img alt="git-pulse logo" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNzkuMDggMzM2LjUyIj4NCiAgPHJhZGlhbEdyYWRpZW50DQogICAgICBpZD0icmFkaWFsR3JhZGllbnQzNzM0Ig0KICAgICAgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiDQogICAgICBjeT0iNjkwLjI4Ig0KICAgICAgY3g9IjQ2Ny43MSINCiAgICAgIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMTQuNTcyIC0uMDAyMDExOSAuMDE2OTM5IDE4MC4wOSAtNjM1OS40IC0xLjIzNDVlNSkiDQogICAgICByPSI0MC42MjMiPg0KICAgIDxzdG9wIGlkPSJzdG9wMzczMCIgc3R5bGU9InN0b3AtY29sb3I6IzIyOEIyMiIgb2Zmc2V0PSIwIiAvPg0KICAgIDxzdG9wIGlkPSJzdG9wMzczMiIgc3R5bGU9InN0b3AtY29sb3I6IzIyOEIyMjtzdG9wLW9wYWNpdHk6MCIgb2Zmc2V0PSIxIiAvPg0KICA8L3JhZGlhbEdyYWRpZW50Pg0KICA8ZyBpZD0ibGF5ZXIxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDY3LjcxIC02MjMuNTMpIj4NCiAgICA8cGF0aCBpZD0icGF0aDIzOTYiDQogICAgICAgIHN0eWxlPSJzdHJva2U6dXJsKCNyYWRpYWxHcmFkaWVudDM3MzQpO3N0cm9rZS13aWR0aDoyNC4wNDU7ZmlsbDpub25lIg0KICAgICAgICBkPSJtNDc5LjczIDg1MC42OHMxOS42OSAxMSAyNi4zNSAxNy44NGMxMCAxMC4yNyAxOS4wNSA1Mi45OCAyNS43IDQwLjI4IDQwLjItNzYuNzYgNTguMTItMjczLjI1IDU4LjEyLTI3My4yNXMwLjM3IDEyNS4zOSA3LjQzIDE3OC41M2M1LjM0IDQwLjI2IDE5LjY3IDE0OS43MSAyOS44NyAxMzIuMDIgMTcuMDItMjkuNTEgMjIuNjMtODcuMTYgMzIuOTctMTI2LjY1IDQuOTUtMTguOTIgMTguNjMgMzcuOTcgMzEuMjMgNTcuMjYgNS43MiA4Ljc2IDQuOTYtMzMuMTkgMTUuNjEtMzIuMSAyNi4wMyAyLjY2IDI3Ljc2IDAuODcgMjcuNzYgMC44NyIgLz4NCiAgPC9nPg0KPC9zdmc%2B" height="75">
+    </a>
+  </div>
+  <div>
+    <h1>Pulse rankings: committer data</h1>
+    <p>
+    <a href="index.html">Committers</a>
+    •
+    <a href="index-rankings-issues.html">Issues</a>
+    •
+    <a href="index-rankings-PRs.html">PRs</a>
+    <p>
+    <i>Click on any row to highlight the given project’s rows in all tables.</i>
+    <p>
+    <i>Click on any project name to view the latest
+      <a href="https://github.com/git-pulse/tools#pulse-snapshots">pulse snapshot</a>
+      for that project.</i>
+  </div>
+</section>
+<div>
+  <table>
+    <caption>new committers per month
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>125
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>13
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>3
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>2
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>2
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>1
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>1
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>0
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>0
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>0
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>0
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>0
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>0
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>0
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>0
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>0
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>0
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>0
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>0
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>0
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>0
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>0
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>0
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>0
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>0
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>0
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>0
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>0
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>0
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>0
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>0
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>0
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>0
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>0
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>0
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>0
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>0
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>0
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>0
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>0
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>0
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>0
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>0
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>0
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>0
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>0
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>0
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>0
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>0
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>0
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>0
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>0
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>0
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>0
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>0
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>0
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>0
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>0
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>0
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>0
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>0
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>0
+  </table>
+  <table>
+    <caption>new committers percentage
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>69
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>40
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>33
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>25
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>14
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>13
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>10
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>0
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>0
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>0
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>0
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>0
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>0
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>0
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>0
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>0
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>0
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>0
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>0
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>0
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>0
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>0
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>0
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>0
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>0
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>0
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>0
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>0
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>0
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>0
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>0
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>0
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>0
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>0
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>0
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>0
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>0
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>0
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>0
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>0
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>0
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>0
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>0
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>0
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>0
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>0
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>0
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>0
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>0
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>0
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>0
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>0
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>0
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>0
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>0
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>0
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>0
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>0
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>0
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>0
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>0
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>0
+  </table>
+  <table>
+    <caption>total active committers per month
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>181
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>123
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>15
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>12
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>7
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>5
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>5
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>5
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>4
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>4
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>4
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>3
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>3
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>3
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>3
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>3
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>2
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>2
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>2
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>2
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>2
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>2
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>2
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>2
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>2
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>2
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>2
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>2
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>2
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>1
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>1
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>1
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>1
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>1
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>1
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>1
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>1
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>1
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>1
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>1
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>1
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>1
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>1
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>1
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>1
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>1
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>1
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>1
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>1
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>1
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>0
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>0
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>0
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>0
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>0
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>0
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>0
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>0
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>0
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>0
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>0
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>0
+  </table>
+  <table>
+    <caption>commits per month
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>619
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>347
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>107
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>79
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>38
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>32
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>27
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>24
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>24
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>24
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>20
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>19
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>17
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>15
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>14
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>14
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>9
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>8
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>7
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>7
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>7
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>7
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>7
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>6
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>6
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>6
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>6
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>6
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>6
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>5
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>5
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>4
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>4
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>4
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>3
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>3
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>3
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>3
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>3
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>2
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>2
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>2
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>2
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>2
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>2
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>2
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>1
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>1
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>1
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>1
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>1
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>1
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>1
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>1
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>1
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>1
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>1
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>1
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>1
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>1
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>1
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>1
+  </table>
+  <table>
+    <caption>cumulative total committers
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>2341
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>2157
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>354
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>348
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>168
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>138
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>138
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>125
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>120
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>91
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>88
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>87
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>83
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>79
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>78
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>78
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>77
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>74
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>72
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>71
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>71
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>67
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>65
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>65
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>63
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>59
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>58
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>55
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>55
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>55
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>54
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>54
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>48
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>48
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>46
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>41
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>40
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>39
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>38
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>38
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>36
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>36
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>34
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>34
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>33
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>28
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>27
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>25
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>25
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>25
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>25
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>23
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>21
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>19
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>18
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>16
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>16
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>16
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>15
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>11
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>6
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>5
+  </table>
+  <table>
+    <caption>forks count
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>10064
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>2706
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>2416
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>1234
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>542
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>403
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>399
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>356
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>337
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>328
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>303
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>196
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>189
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>186
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>186
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>181
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>169
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>168
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>168
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>165
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>164
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>162
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>161
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>159
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>158
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>157
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>154
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>143
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>139
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>129
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>128
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>118
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>117
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>110
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>101
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>84
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>80
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>79
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>78
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>78
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>77
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>77
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>76
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>75
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>72
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>71
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>68
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>67
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>66
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>65
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>65
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>63
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>63
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>63
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>62
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>60
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>58
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>57
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>56
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>51
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>51
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>11
+  </table>
+  <table>
+    <caption>commits per committer per month
+    <tr class="w3c_epub_specs" title="Click to highlight the w3c/epub-specs project’s rows in all tables."><td><a href="w3c-epub-specs-2022-07-09-pulse.html">w3c/epub-specs</a><td>19.75
+    <tr class="w3c_i18n_drafts" title="Click to highlight the w3c/i18n-drafts project’s rows in all tables."><td><a href="w3c-i18n-drafts-2022-07-09-pulse.html">w3c/i18n-drafts</a><td>13.5
+    <tr class="Maps4HTML_Web_Map_Custom_Element" title="Click to highlight the Maps4HTML/Web-Map-Custom-Element project’s rows in all tables."><td><a href="Maps4HTML-Web-Map-Custom-Element-2022-09-23-pulse.html">Maps4HTML/Web-Map-Custom-Element</a><td>10
+    <tr class="w3c_respec" title="Click to highlight the w3c/respec project’s rows in all tables."><td><a href="w3c-respec-2022-07-09-pulse.html">w3c/respec</a><td>8
+    <tr class="w3c_wot_thing_description" title="Click to highlight the w3c/wot-thing-description project’s rows in all tables."><td><a href="w3c-wot-thing-description-2022-07-09-pulse.html">w3c/wot-thing-description</a><td>7.6
+    <tr class="w3c_wai_website" title="Click to highlight the w3c/wai-website project’s rows in all tables."><td><a href="w3c-wai-website-2022-07-09-pulse.html">w3c/wai-website</a><td>7.5
+    <tr class="w3c_csswg_drafts" title="Click to highlight the w3c/csswg-drafts project’s rows in all tables."><td><a href="w3c-csswg-drafts-2022-07-09-pulse.html">w3c/csswg-drafts</a><td>7.13
+    <tr class="w3c_wai_about_wai" title="Click to highlight the w3c/wai-about-wai project’s rows in all tables."><td><a href="w3c-wai-about-wai-2022-07-09-pulse.html">w3c/wai-about-wai</a><td>7
+    <tr class="w3c_wcag" title="Click to highlight the w3c/wcag project’s rows in all tables."><td><a href="w3c-wcag-2022-07-09-pulse.html">w3c/wcag</a><td>6.4
+    <tr class="w3c_wai_intro_wcag" title="Click to highlight the w3c/wai-intro-wcag project’s rows in all tables."><td><a href="w3c-wai-intro-wcag-2022-07-09-pulse.html">w3c/wai-intro-wcag</a><td>6
+    <tr class="w3c_did_core" title="Click to highlight the w3c/did-core project’s rows in all tables."><td><a href="w3c-did-core-2022-07-09-pulse.html">w3c/did-core</a><td>6
+    <tr class="w3c_automotive" title="Click to highlight the w3c/automotive project’s rows in all tables."><td><a href="w3c-automotive-2022-07-09-pulse.html">w3c/automotive</a><td>6
+    <tr class="w3c_w3process" title="Click to highlight the w3c/w3process project’s rows in all tables."><td><a href="w3c-w3process-2022-07-09-pulse.html">w3c/w3process</a><td>5
+    <tr class="w3c_wot" title="Click to highlight the w3c/wot project’s rows in all tables."><td><a href="w3c-wot-2022-07-09-pulse.html">w3c/wot</a><td>4.75
+    <tr class="w3c_webcodecs" title="Click to highlight the w3c/webcodecs project’s rows in all tables."><td><a href="w3c-webcodecs-2022-07-09-pulse.html">w3c/webcodecs</a><td>4.67
+    <tr class="w3c_permissions" title="Click to highlight the w3c/permissions project’s rows in all tables."><td><a href="w3c-permissions-2022-07-09-pulse.html">w3c/permissions</a><td>4.5
+    <tr class="immersive_web_webxr" title="Click to highlight the immersive-web/webxr project’s rows in all tables."><td><a href="immersive-web-webxr-2022-07-09-pulse.html">immersive-web/webxr</a><td>4
+    <tr class="WICG_webpackage" title="Click to highlight the WICG/webpackage project’s rows in all tables."><td><a href="WICG-webpackage-2022-07-09-pulse.html">WICG/webpackage</a><td>4
+    <tr class="w3c_web_performance" title="Click to highlight the w3c/web-performance project’s rows in all tables."><td><a href="w3c-web-performance-2022-07-09-pulse.html">w3c/web-performance</a><td>4
+    <tr class="w3c_aria_practices" title="Click to highlight the w3c/aria-practices project’s rows in all tables."><td><a href="w3c-aria-practices-2022-07-09-pulse.html">w3c/aria-practices</a><td>3.5
+    <tr class="w3c_webauthn" title="Click to highlight the w3c/webauthn project’s rows in all tables."><td><a href="w3c-webauthn-2022-07-09-pulse.html">w3c/webauthn</a><td>3.5
+    <tr class="w3c_vc_data_model" title="Click to highlight the w3c/vc-data-model project’s rows in all tables."><td><a href="w3c-vc-data-model-2022-07-09-pulse.html">w3c/vc-data-model</a><td>3.5
+    <tr class="tc39_ecma262" title="Click to highlight the tc39/ecma262 project’s rows in all tables."><td><a href="tc39-ecma262-2022-07-09-pulse.html">tc39/ecma262</a><td>3.43
+    <tr class="mdn_content highlight" title="Click to highlight the mdn/content project’s rows in all tables."><td><a href="mdn-content-2022-07-09-pulse.html">mdn/content</a><td>3.42
+    <tr class="w3c_did_spec_registries" title="Click to highlight the w3c/did-spec-registries project’s rows in all tables."><td><a href="w3c-did-spec-registries-2022-07-09-pulse.html">w3c/did-spec-registries</a><td>3.4
+    <tr class="w3c_webappsec" title="Click to highlight the w3c/webappsec project’s rows in all tables."><td><a href="w3c-webappsec-2022-07-09-pulse.html">w3c/webappsec</a><td>3
+    <tr class="WebAudio_web_audio_api" title="Click to highlight the WebAudio/web-audio-api project’s rows in all tables."><td><a href="WebAudio-web-audio-api-2022-07-09-pulse.html">WebAudio/web-audio-api</a><td>3
+    <tr class="w3c_sdw" title="Click to highlight the w3c/sdw project’s rows in all tables."><td><a href="w3c-sdw-2022-07-09-pulse.html">w3c/sdw</a><td>3
+    <tr class="w3c_web_share" title="Click to highlight the w3c/web-share project’s rows in all tables."><td><a href="w3c-web-share-2022-07-09-pulse.html">w3c/web-share</a><td>3
+    <tr class="w3c_clreq" title="Click to highlight the w3c/clreq project’s rows in all tables."><td><a href="w3c-clreq-2022-07-09-pulse.html">w3c/clreq</a><td>3
+    <tr class="WICG_ua_client_hints" title="Click to highlight the WICG/ua-client-hints project’s rows in all tables."><td><a href="WICG-ua-client-hints-2022-07-09-pulse.html">WICG/ua-client-hints</a><td>3
+    <tr class="web_platform_tests_wpt" title="Click to highlight the web-platform-tests/wpt project’s rows in all tables."><td><a href="web-platform-tests-wpt-2022-07-09-pulse.html">web-platform-tests/wpt</a><td>2.82
+    <tr class="w3c_webrtc_pc" title="Click to highlight the w3c/webrtc-pc project’s rows in all tables."><td><a href="w3c-webrtc-pc-2022-07-09-pulse.html">w3c/webrtc-pc</a><td>2.5
+    <tr class="w3c_aria" title="Click to highlight the w3c/aria project’s rows in all tables."><td><a href="w3c-aria-2022-07-09-pulse.html">w3c/aria</a><td>2.33
+    <tr class="w3c_mediacapture_main" title="Click to highlight the w3c/mediacapture-main project’s rows in all tables."><td><a href="w3c-mediacapture-main-2022-07-09-pulse.html">w3c/mediacapture-main</a><td>2.33
+    <tr class="whatwg_html" title="Click to highlight the whatwg/html project’s rows in all tables."><td><a href="whatwg-html-2022-07-09-pulse.html">whatwg/html</a><td>2
+    <tr class="WebAssembly_spec" title="Click to highlight the WebAssembly/spec project’s rows in all tables."><td><a href="WebAssembly-spec-2022-07-09-pulse.html">WebAssembly/spec</a><td>2
+    <tr class="whatwg_fetch" title="Click to highlight the whatwg/fetch project’s rows in all tables."><td><a href="whatwg-fetch-2022-07-09-pulse.html">whatwg/fetch</a><td>2
+    <tr class="w3c_chinese_ig" title="Click to highlight the w3c/chinese-ig project’s rows in all tables."><td><a href="w3c-chinese-ig-2022-07-09-pulse.html">w3c/chinese-ig</a><td>2
+    <tr class="w3c_wai_tutorials" title="Click to highlight the w3c/wai-tutorials project’s rows in all tables."><td><a href="w3c-wai-tutorials-2022-07-09-pulse.html">w3c/wai-tutorials</a><td>2
+    <tr class="w3c_webdriver" title="Click to highlight the w3c/webdriver project’s rows in all tables."><td><a href="w3c-webdriver-2022-07-09-pulse.html">w3c/webdriver</a><td>2
+    <tr class="w3c_payment_request" title="Click to highlight the w3c/payment-request project’s rows in all tables."><td><a href="w3c-payment-request-2022-07-09-pulse.html">w3c/payment-request</a><td>2
+    <tr class="w3c_webidl2_js" title="Click to highlight the w3c/webidl2.js project’s rows in all tables."><td><a href="w3c-webidl2.js-2022-07-09-pulse.html">w3c/webidl2.js</a><td>2
+    <tr class="w3c_webcrypto" title="Click to highlight the w3c/webcrypto project’s rows in all tables."><td><a href="w3c-webcrypto-2022-07-09-pulse.html">w3c/webcrypto</a><td>2
+    <tr class="whatwg_streams" title="Click to highlight the whatwg/streams project’s rows in all tables."><td><a href="whatwg-streams-2022-07-09-pulse.html">whatwg/streams</a><td>1.5
+    <tr class="w3c_ServiceWorker" title="Click to highlight the w3c/ServiceWorker project’s rows in all tables."><td><a href="w3c-ServiceWorker-2022-07-09-pulse.html">w3c/ServiceWorker</a><td>1
+    <tr class="whatwg_dom" title="Click to highlight the whatwg/dom project’s rows in all tables."><td><a href="whatwg-dom-2022-07-09-pulse.html">whatwg/dom</a><td>1
+    <tr class="WebAssembly_WASI" title="Click to highlight the WebAssembly/WASI project’s rows in all tables."><td><a href="WebAssembly-WASI-2022-07-09-pulse.html">WebAssembly/WASI</a><td>1
+    <tr class="w3c_manifest" title="Click to highlight the w3c/manifest project’s rows in all tables."><td><a href="w3c-manifest-2022-07-09-pulse.html">w3c/manifest</a><td>1
+    <tr class="whatwg_webidl" title="Click to highlight the whatwg/webidl project’s rows in all tables."><td><a href="whatwg-webidl-2022-07-09-pulse.html">whatwg/webidl</a><td>1
+    <tr class="whatwg_url" title="Click to highlight the whatwg/url project’s rows in all tables."><td><a href="whatwg-url-2022-07-09-pulse.html">whatwg/url</a><td>1
+    <tr class="w3c_css_houdini_drafts" title="Click to highlight the w3c/css-houdini-drafts project’s rows in all tables."><td><a href="w3c-css-houdini-drafts-2022-07-09-pulse.html">w3c/css-houdini-drafts</a><td>1
+    <tr class="w3c_IndexedDB" title="Click to highlight the w3c/IndexedDB project’s rows in all tables."><td><a href="w3c-IndexedDB-2022-07-09-pulse.html">w3c/IndexedDB</a><td>1
+    <tr class="w3c_webappsec_csp" title="Click to highlight the w3c/webappsec-csp project’s rows in all tables."><td><a href="w3c-webappsec-csp-2022-07-09-pulse.html">w3c/webappsec-csp</a><td>1
+    <tr class="w3c_trace_context" title="Click to highlight the w3c/trace-context project’s rows in all tables."><td><a href="w3c-trace-context-2022-07-09-pulse.html">w3c/trace-context</a><td>1
+    <tr class="w3c_wai_audiences" title="Click to highlight the w3c/wai-audiences project’s rows in all tables."><td><a href="w3c-wai-audiences-2022-07-09-pulse.html">w3c/wai-audiences</a><td>1
+    <tr class="w3c_web_advertising" title="Click to highlight the w3c/web-advertising project’s rows in all tables."><td><a href="w3c-web-advertising-2022-07-09-pulse.html">w3c/web-advertising</a><td>1
+    <tr class="w3c_media_source" title="Click to highlight the w3c/media-source project’s rows in all tables."><td><a href="w3c-media-source-2022-07-09-pulse.html">w3c/media-source</a><td>1
+    <tr class="w3c_web_nfc" title="Click to highlight the w3c/web-nfc project’s rows in all tables."><td><a href="w3c-web-nfc-2022-07-09-pulse.html">w3c/web-nfc</a><td>1
+    <tr class="w3c_webappsec_trusted_types" title="Click to highlight the w3c/webappsec-trusted-types project’s rows in all tables."><td><a href="w3c-webappsec-trusted-types-2022-07-09-pulse.html">w3c/webappsec-trusted-types</a><td>1
+    <tr class="w3c_sensors" title="Click to highlight the w3c/sensors project’s rows in all tables."><td><a href="w3c-sensors-2022-07-09-pulse.html">w3c/sensors</a><td>1
+    <tr class="w3c_uievents" title="Click to highlight the w3c/uievents project’s rows in all tables."><td><a href="w3c-uievents-2022-07-09-pulse.html">w3c/uievents</a><td>1
+  </table>
+</div>
+<p>
+<a href="https://github.com/git-pulse/tools">
+  <img height=18 alt="git-pulse logo" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNzkuMDggMzM2LjUyIj4NCiAgPHJhZGlhbEdyYWRpZW50DQogICAgICBpZD0icmFkaWFsR3JhZGllbnQzNzM0Ig0KICAgICAgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiDQogICAgICBjeT0iNjkwLjI4Ig0KICAgICAgY3g9IjQ2Ny43MSINCiAgICAgIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMTQuNTcyIC0uMDAyMDExOSAuMDE2OTM5IDE4MC4wOSAtNjM1OS40IC0xLjIzNDVlNSkiDQogICAgICByPSI0MC42MjMiPg0KICAgIDxzdG9wIGlkPSJzdG9wMzczMCIgc3R5bGU9InN0b3AtY29sb3I6IzIyOEIyMiIgb2Zmc2V0PSIwIiAvPg0KICAgIDxzdG9wIGlkPSJzdG9wMzczMiIgc3R5bGU9InN0b3AtY29sb3I6IzIyOEIyMjtzdG9wLW9wYWNpdHk6MCIgb2Zmc2V0PSIxIiAvPg0KICA8L3JhZGlhbEdyYWRpZW50Pg0KICA8ZyBpZD0ibGF5ZXIxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDY3LjcxIC02MjMuNTMpIj4NCiAgICA8cGF0aCBpZD0icGF0aDIzOTYiDQogICAgICAgIHN0eWxlPSJzdHJva2U6dXJsKCNyYWRpYWxHcmFkaWVudDM3MzQpO3N0cm9rZS13aWR0aDoyNC4wNDU7ZmlsbDpub25lIg0KICAgICAgICBkPSJtNDc5LjczIDg1MC42OHMxOS42OSAxMSAyNi4zNSAxNy44NGMxMCAxMC4yNyAxOS4wNSA1Mi45OCAyNS43IDQwLjI4IDQwLjItNzYuNzYgNTguMTItMjczLjI1IDU4LjEyLTI3My4yNXMwLjM3IDEyNS4zOSA3LjQzIDE3OC41M2M1LjM0IDQwLjI2IDE5LjY3IDE0OS43MSAyOS44NyAxMzIuMDIgMTcuMDItMjkuNTEgMjIuNjMtODcuMTYgMzIuOTctMTI2LjY1IDQuOTUtMTguOTIgMTguNjMgMzcuOTcgMzEuMjMgNTcuMjYgNS43MiA4Ljc2IDQuOTYtMzMuMTkgMTUuNjEtMzIuMSAyNi4wMyAyLjY2IDI3Ljc2IDAuODcgMjcuNzYgMC44NyIgLz4NCiAgPC9nPg0KPC9zdmc%2B"
+></a>
+<small>Generated with <a href="https://github.com/git-pulse/tools">git-pulse-rank.js</a></small>
+<script>
+const classToHighlight = localStorage.getItem("classToHighlight");
+if (classToHighlight) {
+  document.querySelectorAll(".highlight")
+    .forEach((element) => element.classList.remove("highlight"));
+  document.querySelectorAll("." + classToHighlight)
+  .forEach((element) => element.classList.add("highlight"));
+}
+document.body.onclick = (e) => {
+  if (e.target.tagName === "A") {
+    return;
+  }
+  document.querySelectorAll(".highlight")
+    .forEach((element) => element.classList.remove("highlight"));
+  const className = e.target.parentNode.className;
+  document.querySelectorAll("." + className)
+    .forEach((element) => element.classList.add("highlight"));
+  localStorage.setItem("classToHighlight", className);
+}
+</script>
